@@ -1,9 +1,10 @@
 const jwt = require("jsonwebtoken");
 
 const verificarToken = (req, res, next) => {
-  // El token llega en el header: Authorization: Bearer <token>
+
   const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
+  //const token = authHeader && authHeader.split(" ")[1]; //Linea con Problema
+  const token = authHeader?.split(" ")[1]; //Linea corregida usando optional chaining
 
   if (!token) {
     return res.status(401).json({ error: "Token requerido." });
